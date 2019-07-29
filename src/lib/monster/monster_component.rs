@@ -1,6 +1,6 @@
 use super::super::ground::GROUND_TOP;
 use super::super::camera::ARENA_WIDTH;
-use super::super::position::Position;
+use super::super::position_component::Position;
 use amethyst::assets::{AssetStorage, Handle, Loader};
 use amethyst::core::Transform;
 use amethyst::ecs::{
@@ -10,8 +10,23 @@ use amethyst::prelude::*;
 use amethyst::renderer::{ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture};
 
 pub const MONSTER_WIDTH: f32 = 64.0;
+pub const MONSTER_HEIGHT: f32 = 64.0;
 
-pub struct Monster;
+#[derive(PartialEq)]
+pub enum MonsterState {
+  Alive,
+  Dead
+}
+
+pub struct Monster {
+  pub state: MonsterState,
+}
+
+impl Monster {
+  pub fn new() -> Monster {
+    Monster{state: MonsterState::Alive}
+  }
+}
 
 impl Component for Monster {
   type Storage = DenseVecStorage<Self>;
@@ -32,7 +47,7 @@ pub fn init_monster(world: &mut World) {
 
   world
     .create_entity()
-    .with(Monster)
+    .with(Monster::new())
     .with(Position)
     .with(transform)
     .with(sprite_render)

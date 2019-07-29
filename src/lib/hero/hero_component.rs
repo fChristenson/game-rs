@@ -1,25 +1,27 @@
 use super::super::ground::GROUND_TOP;
 use super::super::camera::ARENA_HEIGHT;
-use super::hero_animation::HeroAnimation;
+use super::hero_animation_component::HeroAnimation;
 use super::hero_jump_component::Jump;
-use super::super::position::Position;
+use super::super::position_component::Position;
 use amethyst::assets::{AssetStorage, Handle, Loader};
 use amethyst::core::Transform;
 use amethyst::ecs::{
-  Component, DenseVecStorage, World
+  Component, World, NullStorage
 };
 use amethyst::prelude::*;
 use amethyst::renderer::{ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture};
 
+#[derive(Default)]
 pub struct Hero;
 
 pub const HERO_RUN_SPEED: f32 = 200.0;
 pub const HERO_JUMP_DURATION: f32 = 1.0;
 pub const HERO_JUMP_HEIGHT: f32 = (ARENA_HEIGHT - GROUND_TOP) / 4.0;
 pub const HERO_WIDTH: f32 = 32.0;
+pub const HERO_HEIGHT: f32 = 32.0;
 
 impl Component for Hero {
-  type Storage = DenseVecStorage<Self>;
+  type Storage = NullStorage<Self>;
 }
 
 pub fn init_hero(world: &mut World) {
@@ -32,7 +34,7 @@ pub fn init_hero(world: &mut World) {
 
   let sprite_render = SpriteRender {
     sprite_sheet: sprite_handle,
-    sprite_number: 7,
+    sprite_number: 0,
   };
 
   world

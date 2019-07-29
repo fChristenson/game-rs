@@ -1,5 +1,5 @@
 use super::ground_component::GROUND_TOP;
-use super::super::position::Position;
+use super::super::position_component::Position;
 use amethyst::core::Transform;
 use amethyst::ecs::{WriteStorage, ReadStorage, System, Join};
 

@@ -1,4 +1,4 @@
-use super::super::gravity::GRAVITY;
+use super::super::gravity_system::GRAVITY;
 use super::hero_component::{HERO_JUMP_HEIGHT, HERO_JUMP_DURATION, Hero};
 use super::hero_jump_component::Jump;
 use amethyst::core::timing::Time;

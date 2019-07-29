@@ -3,5 +3,7 @@
     "horizontal": Emulated(pos: Key(D), neg: Key(A)),
     "vertical": Emulated(pos: Key(W), neg: Key(S)),
   },
-  actions: {},
+  actions: {
+    "attack": [ [Key(Space)] ]
+  },
 )

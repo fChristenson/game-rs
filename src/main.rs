@@ -7,7 +7,7 @@ use amethyst::input::{InputBundle, StringBindings};
 use amethyst::window::WindowBundle;
 use amethyst::{start_logger, Application, Error, GameDataBuilder, LoggerConfig};
 
-use lib::{GameGraphCreator, GameState, HeroJumpSystem, HeroRunSystem, MonsterSystem, GroundSystem, GravitySystem};
+use lib::{GameGraphCreator, GameState, HeroAttackSystem, HeroAnimationSystem, HeroJumpSystem, HeroRunSystem, MonsterSystem, GroundSystem, GravitySystem};
 
 fn main() -> Result<(), Error> {
     start_logger(LoggerConfig::default());
@@ -28,6 +28,8 @@ fn main() -> Result<(), Error> {
         )
         .with(HeroRunSystem, "hero_run_system", &["input_system"])
         .with(HeroJumpSystem, "hero_jump_system", &["input_system"])
+        .with(HeroAttackSystem, "hero_attack_system", &["input_system"])
+        .with(HeroAnimationSystem, "hero_animation_system", &[])
         .with(MonsterSystem, "monster_system", &[])
         .with(GravitySystem, "gravity_system", &["hero_jump_system"])
         .with(GroundSystem, "ground_system", &["gravity_system", "hero_jump_system"])

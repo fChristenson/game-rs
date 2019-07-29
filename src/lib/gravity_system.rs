@@ -1,4 +1,4 @@
-use super::position::Position;
+use super::position_component::Position;
 use super::hero::HERO_JUMP_HEIGHT;
 use amethyst::core::Transform;
 use amethyst::core::timing::Time;

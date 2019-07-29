@@ -1,10 +1,11 @@
 use amethyst::assets::{AssetStorage, Handle, Loader};
 use amethyst::core::Transform;
-use amethyst::ecs::{Component, DenseVecStorage, World};
+use amethyst::ecs::{Component, NullStorage, World};
 use amethyst::prelude::*;
 use amethyst::window::ScreenDimensions;
 use amethyst::renderer::{ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture};
 
+#[derive(Default)]
 pub struct Ground;
 
 const GROUND_HEIGHT: f32 = 64.0;
@@ -12,7 +13,7 @@ const GROUND_WIDTH: f32 = 128.0;
 pub const GROUND_TOP: f32 = GROUND_HEIGHT * 1.5;
 
 impl Component for Ground {
-  type Storage = DenseVecStorage<Self>;
+  type Storage = NullStorage<Self>;
 }
 
 pub fn init_ground(world: &mut World) {
