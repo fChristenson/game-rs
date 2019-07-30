@@ -10,7 +10,7 @@ pub struct Ground;
 
 const GROUND_HEIGHT: f32 = 64.0;
 const GROUND_WIDTH: f32 = 128.0;
-pub const GROUND_TOP: f32 = GROUND_HEIGHT * 1.5;
+pub const GROUND_TOP: f32 = GROUND_HEIGHT * 1.48;
 
 impl Component for Ground {
   type Storage = NullStorage<Self>;

@@ -48,7 +48,7 @@ pub fn init_monster(world: &mut World) {
   world
     .create_entity()
     .with(Monster::new())
-    .with(Position)
+    .with(Position::default())
     .with(transform)
     .with(sprite_render)
     .build();

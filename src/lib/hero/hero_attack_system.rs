@@ -1,4 +1,5 @@
 use super::hero_component::{Hero, HERO_HEIGHT, HERO_WIDTH};
+use super::hero_animation_component::HeroAttackAnimation;
 use super::super::monster::{Monster, MonsterState, MONSTER_HEIGHT, MONSTER_WIDTH};
 use amethyst::core::Transform;
 use amethyst::ecs::{Join, Read, ReadStorage, System, WriteStorage};
@@ -11,13 +12,14 @@ impl<'s> System<'s> for HeroAttackSystem {
     ReadStorage<'s, Transform>,
     WriteStorage<'s, Monster>,
     ReadStorage<'s, Hero>,
+    ReadStorage<'s, HeroAttackAnimation>,
     Read<'s, InputHandler<StringBindings>>,
   );
 
-  fn run(&mut self, (transform, mut monster, hero, input): Self::SystemData) {
+  fn run(&mut self, (transform, mut monster, hero, animation, input): Self::SystemData) {
     let is_attacking = input.action_is_down("attack");
 
-    for (_, hero_transform) in (&hero, &transform).join() {
+    for (_, animation, hero_transform) in (&hero, &animation, &transform).join() {
       let hero_x = hero_transform.translation().x.as_f32() - (HERO_WIDTH * 0.5);
       let hero_y = hero_transform.translation().y.as_f32() - (HERO_HEIGHT * 0.5);
 
@@ -31,7 +33,7 @@ impl<'s> System<'s> for HeroAttackSystem {
         let monster_left = monster_x;
         let is_hit = in_box(hero_x, hero_y, monster_left, monster_bottom, monster_right, monster_top);
 
-        if is_hit && is_attacking.unwrap_or_default() {
+        if is_hit && animation.animation_data.ongoing {
           monster.state = MonsterState::Dead;
         }
       }

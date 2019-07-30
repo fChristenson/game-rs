@@ -1,6 +1,6 @@
 use super::super::ground::GROUND_TOP;
 use super::super::camera::ARENA_HEIGHT;
-use super::hero_animation_component::HeroAnimation;
+use super::hero_animation_component::{HeroAttackAnimation, HeroWalkAnimation};
 use super::hero_jump_component::Jump;
 use super::super::position_component::Position;
 use amethyst::assets::{AssetStorage, Handle, Loader};
@@ -40,9 +40,10 @@ pub fn init_hero(world: &mut World) {
   world
     .create_entity()
     .with(Hero)
-    .with(Position)
+    .with(Position::default())
     .with(Jump::new())
-    .with(HeroAnimation::new(0.1))
+    .with(HeroWalkAnimation::new(0.1, 6))
+    .with(HeroAttackAnimation::new(0.1, 6))
     .with(transform)
     .with(sprite_render)
     .build();
